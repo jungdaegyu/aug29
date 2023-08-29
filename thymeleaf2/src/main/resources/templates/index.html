@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+</head>
+<body>
+	<h1>index입니다.</h1>
+	<span th:text="${txt}">출력됩니다.</span><!--컨트롤러에서 서버 뭐시기라고 적어줬기 때문에 그게 출력되고 '출력됩니다'는 덮어씌워짐 -->
+	
+	<hr>
+	[[${html}]]	<!-- 고대로 찍어주는거 -->
+	<span th:text="${html}"></span> <!--텍스트 고대로만 찍어주는거 <div style=\ \"font-size: 20pt~~~ -->
+	<hr>
+	
+	<hr>
+	<span th:utext="${html}"></span> <!--스타일, 속성까지 먹여서 나옴-->
+	[(${html})] <!--스타일, 속성까지 먹여서 나옴-->
+	<hr>
+	
+	
+	<script type="text/javascript">
+		let text = [[${txt}]]	
+	</script>
+	
+	<hr>
+	<a th:href="@{./main}">naver</a>
+	<a href="./detai?bno=10">title</a> <!--타임리프가 아니면 이렇게 썼음-->
+	<hr>
+	<a th:href="@{./detail(bno=${bno})}">title</a>
+	<a th:href="@{./detail(bno=10, user=150)}">title</a>
+	<hr>
+	<span th:with="name=홍길동" th:text="${name}">여기에 이름이 들어가요</span> <!--홍길동--> 
+	
+	<hr>
+	[[${bno gt 20}]] <!--true-->
+	[[${15 lt 20}]]	<!--true-->
+	<hr>
+	
+	<span th:if="${bno == 20}" th:text="'bno는 20입니다.'"></span> <!--컨트롤러에서 bno를 255로 설정해놨기 때문에 출력 불가-->
+	<span th:if="${bno != 20}" th:text="'bno는 20이 아닙니다.'"></span> <!--출력이 됨-->
+	<hr>
+	[[${list}]] <!--[홍길동0, 홍길동1, 홍길동2~~]-->
+	<hr>
+	<ul th:each="e : ${list}">
+		<li th:text="${e}"></li>
+	</ul>
+	<hr>
+	
+	<span th:each="e : ${list}">
+		<span th:text="${e}"></span>
+	</span>
+	
+	
+</body>
+</html>
